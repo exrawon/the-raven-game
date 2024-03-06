@@ -3,6 +3,7 @@ body {
 	user-select: none;
 	cursor: pointer;
 	overflow: hidden;
+	touch-action: manipulation;
 }
 canvas {
 	position: absolute;
