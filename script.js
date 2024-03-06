@@ -11,11 +11,11 @@ class Raven {
 		this.image.src = './assets/raven.png';
 		this.spriteWidth = 271;
 		this.spriteHeight = 194;
-		this.width = this.spriteWidth * 0.7;
-		this.height = this.spriteHeight * 0.7;
+		this.width = this.spriteWidth * 0.4;
+		this.height = this.spriteHeight * 0.4;
 		this.x = Math.random() * CANVAS_WIDTH + CANVAS_WIDTH;
 		this.y = Math.random() * (CANVAS_HEIGHT - this.height);
-		this.directionX = Math.random() * 5 + 5;
+		this.directionX = Math.random() * 5 + 3;
 		this.directionY = Math.random() * 5 - 2.5;
 		this.frame = 0;
 		this.staggerFrames = 0;
