@@ -1,18 +1,18 @@
 body {
-  background-color: hsl(0, 0%, 90%);
-  user-select: none;
-  cursor: pointer;
-  overflow: hidden;
-  touch-action: manipulation;
+	background-color: hsl(0, 0%, 90%);
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	touch-action: manipulation;
 }
 canvas {
-  position: absolute;
-  border: 1px solid black;
-  width: 100vw;
-  height: 100vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	border: 1px solid black;
+	width: 100vw;
+	height: 100svh;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 /* 
 #collisionCanvas {
