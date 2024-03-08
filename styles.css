@@ -1,7 +1,7 @@
 body {
 	background-color: hsl(0, 0%, 90%);
 	user-select: none;
-	cursor: pointer;
+	cursor: crosshair;
 	overflow: hidden;
 	touch-action: manipulation;
 }
@@ -14,7 +14,8 @@ canvas {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-/* 
+
 #collisionCanvas {
-  background: red;
-} */
+	background: red;
+	opacity: 0;
+}
