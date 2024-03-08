@@ -1,5 +1,5 @@
 body {
-	background-color: hsl(0, 0%, 90%);
+	background: hsl(0, 0%, 90%);
 	user-select: none;
 	cursor: crosshair;
 	overflow: hidden;
@@ -18,4 +18,10 @@ canvas {
 #collisionCanvas {
 	background: red;
 	opacity: 0;
+}
+
+@media screen and (max-width: 1200px) {
+	* {
+		display: none;
+	}
 }
