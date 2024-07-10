@@ -1,27 +1,28 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
 body {
-	background: hsl(0, 0%, 90%);
+	background: hsl(0, 0%, 30%);
 	user-select: none;
 	cursor: crosshair;
 	overflow: hidden;
 	touch-action: manipulation;
 }
 canvas {
+	background: hsl(0, 0%, 90%);
 	position: absolute;
-	border: 1px solid black;
-	width: 100vw;
-	height: 100svh;
+	/* border: 5px solid black; */
+
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
 }
 
 #collisionCanvas {
 	background: red;
 	opacity: 0;
-}
-
-@media screen and (max-width: 1200px) {
-	* {
-		display: none;
-	}
 }
