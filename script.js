@@ -20,6 +20,10 @@ window.addEventListener('load', () => {
 			this.accuracy = 0;
 			this.gameOver = false;
 
+			window.addEventListener('resize', (e) => {
+				console.log(e);
+			});
+
 			window.addEventListener('click', (e) => {
 				this.clicks++;
 				const rect = canvas.getBoundingClientRect();

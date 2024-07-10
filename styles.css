@@ -8,7 +8,7 @@ body {
 	user-select: none;
 	cursor: crosshair;
 	overflow: hidden;
-	touch-action: manipulation;
+	/* touch-action: manipulation; */
 }
 canvas {
 	background: hsl(0, 0%, 90%);
