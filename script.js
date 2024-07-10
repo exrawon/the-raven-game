@@ -21,99 +21,108 @@ window.addEventListener('load', () => {
 			this.gameOver = false;
 			console.log(window.innerWidth);
 
-			window.addEventListener('click', (e) => {
-				this.clicks++;
-				const rect = canvas.getBoundingClientRect();
-				const detectPixelColor = collisionCtx.getImageData(
-					e.x - rect.x,
-					e.y - rect.y,
-					1,
-					1
-				);
-				//getImageData returns array of srbg values of the clicked image
-				const pixelColor = [...detectPixelColor.data].splice(0, 3).join('');
+			//for desktop
+			if (window.innerWidth >= this.width) {
+				window.addEventListener('click', (e) => {
+					this.clicks++;
+					const rect = canvas.getBoundingClientRect();
+					const detectPixelColor = collisionCtx.getImageData(
+						e.x - rect.x,
+						e.y - rect.y,
+						1,
+						1
+					);
+					//getImageData returns array of srbg values of the clicked image
+					const pixelColor = [...detectPixelColor.data].splice(0, 3).join('');
 
-				if (pixelColor === '000' && !this.gameOver) {
-					const ricochet = new Audio('./assets/ricochet.mp3');
-					ricochet.play();
-				}
-				//turning the srbg into an identifier key for individual ravens
-				this.ravens.map((obj) => {
-					if (obj.randomColor.join('') === pixelColor && !this.gameOver) {
-						//collision detected
-						obj.toDelete = true;
+					if (pixelColor === '000' && !this.gameOver) {
+						const ricochet = new Audio('./assets/ricochet.mp3');
+						ricochet.play();
+					}
+					//turning the srbg into an identifier key for individual ravens
+					this.ravens.map((obj) => {
+						if (obj.randomColor.join('') === pixelColor && !this.gameOver) {
+							//collision detected
+							obj.toDelete = true;
 
-						this.score++;
-						this.ravenInterval += 10;
-						this.explosions.push(new Explosion(this, obj.x, obj.y, obj.width));
+							this.score++;
+							this.ravenInterval += 10;
+							this.explosions.push(
+								new Explosion(this, obj.x, obj.y, obj.width)
+							);
 
-						obj.sound.play();
+							obj.sound.play();
+						}
+					});
+					if (this.ravenInterval > 200) {
+						this.ravenInterval -= 20;
+					}
+
+					if (this.gameOver) {
+						const reload = new Audio('./assets/reload.wav');
+						reload.play();
+						setTimeout(() => {
+							this.reset();
+						}, 1500);
 					}
 				});
-				if (this.ravenInterval > 200) {
-					this.ravenInterval -= 20;
-				}
+			} else {
+				//for mobile
+				window.addEventListener('touchstart', (e) => {
+					this.clicks++;
+					const rect = canvas.getBoundingClientRect();
 
-				if (this.gameOver) {
-					const reload = new Audio('./assets/reload.wav');
-					reload.play();
-					setTimeout(() => {
-						this.reset();
-					}, 1500);
-				}
-			});
-			window.addEventListener('touchstart', (e) => {
-				this.clicks++;
-				const rect = canvas.getBoundingClientRect();
+					const detectPixelColor = collisionCtx.getImageData(
+						e.touches[0].clientX - rect.x,
+						e.touches[0].clientY - rect.y,
+						1,
+						1
+					);
 
-				const detectPixelColor = collisionCtx.getImageData(
-					e.touches[0].clientX - rect.x,
-					e.touches[0].clientY - rect.y,
-					1,
-					1
-				);
+					//getImageData returns array of srbg values of the clicked image
+					const pixelColor = [...detectPixelColor.data].splice(0, 3).join('');
 
-				//getImageData returns array of srbg values of the clicked image
-				const pixelColor = [...detectPixelColor.data].splice(0, 3).join('');
+					if (pixelColor === '000' && !this.gameOver) {
+						const ricochet = new Audio('./assets/ricochet.mp3');
+						ricochet.play();
+					}
+					//turning the srbg into an identifier key for individual ravens
+					this.ravens.map((obj) => {
+						if (obj.randomColor.join('') === pixelColor && !this.gameOver) {
+							//collision detected
+							obj.toDelete = true;
 
-				if (pixelColor === '000' && !this.gameOver) {
-					const ricochet = new Audio('./assets/ricochet.mp3');
-					ricochet.play();
-				}
-				//turning the srbg into an identifier key for individual ravens
-				this.ravens.map((obj) => {
-					if (obj.randomColor.join('') === pixelColor && !this.gameOver) {
-						//collision detected
-						obj.toDelete = true;
+							this.score++;
+							this.ravenInterval += 10;
+							this.explosions.push(
+								new Explosion(this, obj.x, obj.y, obj.width)
+							);
 
-						this.score++;
-						this.ravenInterval += 10;
-						this.explosions.push(new Explosion(this, obj.x, obj.y, obj.width));
+							obj.sound.play();
+						}
+					});
+					if (this.ravenInterval > 200) {
+						this.ravenInterval -= 20;
+					}
 
-						obj.sound.play();
+					if (this.gameOver) {
+						const reload = new Audio('./assets/reload.wav');
+						reload.play();
+						setTimeout(() => {
+							this.reset();
+						}, 1500);
 					}
 				});
-				if (this.ravenInterval > 200) {
-					this.ravenInterval -= 20;
-				}
-
-				if (this.gameOver) {
-					const reload = new Audio('./assets/reload.wav');
-					reload.play();
-					setTimeout(() => {
-						this.reset();
-					}, 1500);
-				}
-			});
-			window.addEventListener('keyup', (e) => {
-				if (e.key === ' ' && this.gameOver) {
-					const reload = new Audio('./assets/reload.wav');
-					reload.play();
-					setTimeout(() => {
-						this.reset();
-					}, 1500);
-				}
-			});
+				window.addEventListener('keyup', (e) => {
+					if (e.key === ' ' && this.gameOver) {
+						const reload = new Audio('./assets/reload.wav');
+						reload.play();
+						setTimeout(() => {
+							this.reset();
+						}, 1500);
+					}
+				});
+			}
 		}
 		draw(context, collisionContext) {
 			context.font = ' 35px Impact ';
