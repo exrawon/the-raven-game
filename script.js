@@ -53,14 +53,6 @@ window.addEventListener('load', () => {
 				if (this.ravenInterval > 200) {
 					this.ravenInterval -= 20;
 				}
-
-				if (this.gameOver) {
-					const reload = new Audio('./assets/reload.wav');
-					reload.play();
-					setTimeout(() => {
-						this.reset();
-					}, 1500);
-				}
 			});
 
 			window.addEventListener('keyup', (e) => {
@@ -288,7 +280,7 @@ window.addEventListener('load', () => {
 	const frameInterval = 1000 / fps;
 	let lastTime = 0;
 
-	function animate(timestamp) {
+	const animate = (timestamp) => {
 		if (!game.gameOver) {
 			requestAnimationFrame(animate);
 		} else game.drawGameOver(ctx);
@@ -302,7 +294,7 @@ window.addEventListener('load', () => {
 
 		const excessTime = deltaTime % frameInterval;
 		lastTime = timestamp - excessTime;
-	}
+	};
 
 	animate(0);
 });
